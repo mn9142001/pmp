@@ -54,13 +54,7 @@ class Command(BaseCommand):
             correct_answers = _correct_answers.split("answer ")
         for o in correct_answers:
             if "&" in o:
-                correct_answers = correct_answers + o.split("&")
-
-        print(_correct_answers, index[(x + 1)], correct_answers, obj['Question'].split(" ")[0])
-        print(bool(set(index[(x + 1)]) & set(correct_answers)))
-        print(Answer.objects.filter(is_correct=True).count, "answers is correct")
-        print("")
-        
+                correct_answers = correct_answers + o.split("&")        
         return bool(set(index[(x + 1)]) & set(correct_answers))
 
 

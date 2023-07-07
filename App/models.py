@@ -1,6 +1,5 @@
-from typing import Iterable, Optional
 from django.db import models
-from django.contrib.auth.models import User
+from user.models import User
 from django.conf import settings
 from rest_framework.authtoken.models import Token
 from django.db.models.signals import post_save

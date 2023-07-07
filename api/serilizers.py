@@ -1,6 +1,6 @@
 from rest_framework import  serializers
 from App.models import Course, Lesson, Comment, Topic, Exam, Question, Answer
-from django.contrib.auth.models import User
+from user.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "App",
+    'user',
     'corsheaders',   
     'rest_framework',
     'jazzmin',
@@ -98,6 +99,8 @@ DATABASES = {
     }
 }
 
+
+AUTH_USER_MODEL = "user.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
