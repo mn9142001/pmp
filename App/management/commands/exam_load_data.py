@@ -42,6 +42,8 @@ class Command(BaseCommand):
         for o in correct_answers:
             if "&" in o:
                 correct_answers = correct_answers + o.split(" & ")
+            if "," in o:
+                correct_answers = correct_answers + o.split(", ")
 
         print(_correct_answers, index[(x + 1)], correct_answers, obj['Question'].split(" ")[0])
         print(bool(set(index[(x + 1)]) & set(correct_answers)))
