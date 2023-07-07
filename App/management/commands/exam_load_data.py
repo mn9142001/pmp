@@ -18,18 +18,29 @@ class Command(BaseCommand):
         """
         course = Course.objects.first()
         for d in data:
-            print(d)
             exam_name = d['Exam Name']
+                
             exam, is_created = Exam.objects.get_or_create(course=course, name=exam_name, exam_type=Exam.ExamTypeChoices.EXAM)
-            question = Question.objects.create(text=d['Question'], exam=exam)
+            question = Question.objects.create(text=d['Question'], exam=exam, 
+                                question_type=self.question_type(d),                                                                            
+                            )
+
             for x in range(6):
                 try:                            
                     answer = d[f"Answer{x+1}"]
-                    Answer.objects.create(question=question, text=answer, is_correct=self.is_correct(d, x))
+                    Answer.objects.create(question=question, 
+                                          text=answer, is_correct=self.is_correct(d, x)
+                                    )
                 except KeyError:
                     continue
         print(f"added {Exam.objects.all().count()} exams")
         print(f"added {Question.objects.filter(exam__exam_type=Exam.ExamTypeChoices.EXAM).count()} questions")
+        print("number of questions with img", Question.objects.filter(img__isnull=False).count())
+    
+    def question_type(self, question):
+        if "&" in question['Correct-Answer'].lower().strip():
+            return "MC"
+        return "OC"
     
     def is_correct(self, obj, x):
         index = {1:['a.', 'a'], 2:["b.", "b"], 3 : ["c.", "c"], 4: ["d.", "d"], 5 : ["e.", "e"], 6 : ["f.", "f"]}

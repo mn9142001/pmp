@@ -88,13 +88,14 @@ class Question(models.Model):
         ('DD', 'Drag and Drop'),
     )
     question_type = models.CharField(max_length=2, choices=QUESTION_TYPE_CHOICES)
+    img = models.FileField(blank=True, null=True)
 
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     is_correct = models.BooleanField(default=False)
     text = models.TextField(blank=True, null=True)
-
+    img = models.FileField(blank=True, null=True)
 
 
     def __str__(self):

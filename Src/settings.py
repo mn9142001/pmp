@@ -271,7 +271,7 @@ JAZZMIN_SETTINGS = {
 }
 JAZZMIN_UI_TWEAKS = {
     "theme": "simplex",
-    "dark_mode_theme": "dark",
+    "dark_mode_theme": "darkly",
     "sidebar_nav_flat_style": True,
     "button_classes": {
         "primary": "btn-primary",
