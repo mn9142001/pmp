@@ -1,0 +1,5 @@
+*.pyc
+venv
+media
+db.sqlite3
+*.rar
