@@ -23,4 +23,12 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     email = models.EmailField(("email address"), unique=True)
+    username = models.CharField(
+        ("username"),
+        max_length=150,
+        help_text=(
+            "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+        ),
+
+    )
     objects = UserManager()
