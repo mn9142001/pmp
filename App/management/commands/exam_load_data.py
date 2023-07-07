@@ -31,11 +31,24 @@ class Command(BaseCommand):
                         continue
         print(f"added {Exam.objects.all().count()} exams")
         print(f"added {Question.objects.filter(exam__exam_type=Exam.ExamTypeChoices.EXAM).count()} questions")
-                    
+    
     def is_correct(self, obj, x):
-        index = {'a.' : 1, "b." : 2, "c." : 3, "d." : 4, "e." : 5, "f." : 6, 'a' : 1, "b" : 2, "c" : 3, "d" : 4, "e" : 5, "f" : 6}
-        correct_answer : str = obj['Correct-Answer']
-        return index[correct_answer.split()[-1].lower()] == (x+1)
+        index = {1:['a.', 'a'], 2:["b.", "b"], 3 : ["c.", "c"], 4: ["d.", "d"], 5 : ["e.", "e"], 6 : ["f.", "f"]}
+        _correct_answers : str = obj['Correct-Answer'].lower().strip()
+        if "answer option" in _correct_answers:
+            correct_answers = _correct_answers.split("answer option ")            
+        else:
+            correct_answers = _correct_answers.split("answer: ")
+        for o in correct_answers:
+            if "&" in o:
+                correct_answers = correct_answers + o.split(" & ")
+
+        print(_correct_answers, index[(x + 1)], correct_answers, obj['Question'].split(" ")[0])
+        print(bool(set(index[(x + 1)]) & set(correct_answers)))
+        print("")
+        
+        return bool(set(index[(x + 1)]) & set(correct_answers))
+
 
     @atomic()
     def iter_data(self, file):
